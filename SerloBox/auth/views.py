@@ -44,10 +44,10 @@ def register_user(request):
             if user:
                 user.set_password(password)
                 user.save()
-                # check = authenticate(username=username, password=password)
-                # print "testing: " 
-                # print check
-            # user was retrieved
+                state = "Your account was created successfully!"
+                login(request, user)
+                return HttpResponseRedirect("/manage/")
+
             else:
                 print "fail"
         # request was empty

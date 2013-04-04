@@ -1,5 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<link rel="stylesheet" href="{{ STATIC_URL }}/auth/forms.css" />
+
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
 <head>
 <title>Log in</title>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
@@ -13,17 +17,24 @@ body{
 <body>
 	{{ state }}
 	<form action="/login/" method="post">
+	<div class="box">
 		{% csrf_token %}
 		{% if next %}
 		<input type="hidden" name="next" value="{{ next }}" />
 		{% endif %}
-		Username:
-		<input type="text" name="username" value="{{ username}}" /><br />
-		Password:
-		<input type="password" name="password" value="" /><br />
+		<label>
+			<span>Username:</span>
+			<input type="text" name="username" value="{{ username}}" /><br />
+		</label>
+
+		<label>
+			<span>Password:</span>
+			<input type="password" name="password" value="" /><br />
+		</label>
 
 		<input type="submit" value="Log In" />
 		<p>Don't have an account?<a href="/register"> Register Now</a></p>
+	</div>
 	</form>
 </body>
 </html>

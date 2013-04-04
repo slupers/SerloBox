@@ -14,10 +14,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'djangostack',
-        'HOST': '/opt/djangostack-1.4.5-0/mysql/tmp/mysql.sock',
-        'PORT': '33060',
+        'HOST': '/home/carlo/djangostack-1.4.5-0/mysql/tmp/mysql.sock',
+        'PORT': '3333',
         'USER': 'bitnami',
-        'PASSWORD': 'ad1a131288'
+        'PASSWORD': '579285f1d6'
     }
 }
 
@@ -72,11 +72,11 @@ MEDIA_URL = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = ''
+STATIC_ROOT = '/home/carlo/djangostack-1.4.5-0/apps/django/django_projects/SerloBox/static/'
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
-STATIC_URL = '/static/'
+STATIC_URL = '/home/carlo/djangostack-1.4.5-0/apps/django/django_projects/SerloBox/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
@@ -84,6 +84,8 @@ STATICFILES_DIRS = (
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
 )
+
+LOGIN_URL = '/login/'
 
 # List of finder classes that know how to find static files in
 # various locations.
@@ -94,7 +96,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = '988114gpx^p2zzzl7++^*#y3jiqm&amp;-j&amp;p$bnx9^delhz+_&amp;(yv'
+SECRET_KEY = 'z$a6sqedr$ni2zil+7oktg9_4e@!znm_4pufmm9bw=3n#@&amp;fo@'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -109,6 +111,8 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware', 
+    #'django.middleware.csrf.CsrfResponseMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -119,10 +123,10 @@ ROOT_URLCONF = 'SerloBox.urls'
 WSGI_APPLICATION = 'SerloBox.wsgi.application'
 
 TEMPLATE_DIRS = (
-	'/opt/djangostack-1.4.5-0/apps/django/SerloBox/SerloBox/templates',
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    '/home/carlo/djangostack-1.4.5-0/apps/django/django_projects/SerloBox/templates'
 )
 
 INSTALLED_APPS = (
@@ -166,3 +170,7 @@ LOGGING = {
         },
     }
 }
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+)
