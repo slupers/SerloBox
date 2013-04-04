@@ -12,7 +12,7 @@ body{
 </head>
 <body>
 	{{ state }}
-	<form action="/login/" method="post">
+	<form action="/register/" method="post">
 		{% csrf_token %}
 		{% if next %}
 		<input type="hidden" name="next" value="{{ next }}" />
@@ -21,9 +21,11 @@ body{
 		<input type="text" name="username" value="{{ username}}" /><br />
 		Password:
 		<input type="password" name="password" value="" /><br />
+		Email:
+		<input type="email" name="email" value="" /><br />
 
-		<input type="submit" value="Log In" />
-		<p>Don't have an account?<a href="/register"> Register Now</a></p>
+		<input type="submit" value="Register" />
+		<p>Already have an account?<a href="/login"> Login Now</a></p>
 	</form>
 </body>
 </html>
