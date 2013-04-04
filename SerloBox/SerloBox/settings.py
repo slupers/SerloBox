@@ -119,7 +119,7 @@ ROOT_URLCONF = 'SerloBox.urls'
 WSGI_APPLICATION = 'SerloBox.wsgi.application'
 
 TEMPLATE_DIRS = (
-	'/opt/djangostack-1.4.5-0/apps/django/django_projects/SerloBox/SerloBox/templates',
+	'/opt/djangostack-1.4.5-0/apps/django/SerloBox/SerloBox/templates',
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
