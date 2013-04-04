@@ -1,0 +1,21 @@
+<h1> Manage your files </h1>
+<ul>
+	{% for file, file_info in files.items %}
+	<li><h3>Filename: {{ file }}</h3></li>
+	<ul>
+		{% for info in file_info %}
+		<li><h5>{{ info }}</h5></li>
+		{% endfor %}
+	</ul>
+	{% endfor %}
+	</ul>
+
+<br></br><br></br><br></br><br></br><br></br><br></br>
+
+<form enctype="multipart/form-data" method="post" action="/manage/">
+   {% csrf_token %}   
+   <table>
+       {{form.as_table}}
+    </table>
+    <input type="submit" value="Submit" id="Save"/>
+</form>

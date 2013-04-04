@@ -5,14 +5,10 @@ from django.conf.urls import patterns, include, url
 # admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'SerloBox.views.home', name='home'),
-    # url(r'^SerloBox/', include('SerloBox.foo.urls')),
-	url(r'^$', 'SerloBox.views.index'),
-	url(r'index', 'index'),
-    url(r'upload','upload'),
+	url(r'^$', 'auth.views.login_user'),
+    url(r'^manage/$','manage.views.upload'),
 	url(r'^login/$', 'auth.views.login_user'),
-	#url(r'login', 'login'),
+	url(r'^register/$', 'auth.views.register_user'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
