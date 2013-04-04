@@ -6,10 +6,10 @@ from django.conf.urls import patterns, include, url
 
 urlpatterns = patterns('',
 	url(r'^$', 'auth.views.login_user'),
-    	url(r'^manage/$','manage.views.upload'),
+    url(r'^manage/$','manage.views.upload'),
 	url(r'^login/$', 'auth.views.login_user'),
 	url(r'^register/$', 'auth.views.register_user'),
-	url(r'^logout/$', 'auth.views.logout'),
+	url(r'^logout/$', 'auth.views.my_logout'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
