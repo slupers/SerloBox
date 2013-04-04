@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="{{STATIC_URL}}forms.css" />
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
@@ -10,22 +12,38 @@ body{
 }
 </style>
 </head>
+
+<div class="header">Serlo Box</div>
+
 <body>
-	{{ state }}
+	<div class="state">{{ state }}</div>
 	<form action="/register/" method="post">
+	<div class="box">
 		{% csrf_token %}
 		{% if next %}
 		<input type="hidden" name="next" value="{{ next }}" />
 		{% endif %}
-		Username:
-		<input type="text" name="username" value="{{ username}}" /><br />
-		Password:
-		<input type="password" name="password" value="" /><br />
-		Email:
-		<input type="email" name="email" value="" /><br />
+		
+		<label>
+			<span>Username:</span>
+			<input type="text" name="username" value="{{ username}}" /><br />
+		</label>
 
-		<input type="submit" value="Register" />
+		<label>
+			<span>Password:</span>
+			<input type="password" name="password" value="" /><br />
+		</label>
+		
+		<label>
+			<span>Email:</span>
+			<input type="email" name="email" value="" /><br />
+		</label>
+
+		<div class="button">
+			<input type="submit" value="Register" />
+		</div>
 		<p>Already have an account?<a href="/login"> Login Now</a></p>
+	</div>
 	</form>
 </body>
 </html>

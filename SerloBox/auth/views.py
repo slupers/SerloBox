@@ -1,7 +1,7 @@
 # Create your views here.
 from django.shortcuts import render_to_response
 from django.template import Context, RequestContext, loader
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import *
 from django.http import HttpResponseRedirect
 from django.contrib.auth.hashers import make_password
@@ -23,13 +23,12 @@ def login_user(request):
             if user.is_active:
                 login(request, user)
                 state = "You're successfully logged in!"
-                return HttpResponseRedirect("/manage")
+                return HttpResponseRedirect("/manage/")
             else:
                 state = "Your account is not active, please contact the site admin."
         else:
             state = "Your username and/or password were incorrect."
-
-    return render_to_response('auth.html',{'state':state, 'username': username}, RequestContext(request))
+    return render_to_response('auth.html',{'state':state, 'username': username}, context_instance=RequestContext(request))
 
 def register_user(request):
     state = "Please register below..."
@@ -47,14 +46,24 @@ def register_user(request):
                 user.save()
                 state = "Your account was created successfully!"
                 login(request, user)
-                return HttpResponseRedirect("/manage")
+                return HttpResponseRedirect("/manage/")
 
             else:
-                state = "Failed to create account. Try again."
+                print "fail"
         # request was empty
         else:
-            pass
+            print "empty"
             
 
     return render_to_response('register.html',{'state':state, 'username': username}, RequestContext(request))
 
+@login_required
+def manage(request):
+    # if not request.user.is_authenticated():
+    #     return render_to_response('auth.html', {'state':"You must be logged in."})
+    return render_to_response('manage.html')
+    
+def mylogout(request):    
+
+    logout(request)
+    return HttpResponseRedirect('/login/')
