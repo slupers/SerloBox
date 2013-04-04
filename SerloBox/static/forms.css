@@ -1,10 +1,11 @@
-/* LIST #5 */
+/* File list CSS */
 #list5 { color:#eee; }
 #list5 ul { font-size:18px; }
 #list5 ul li { }
 #list5 ul li ul { list-style-image: url("/opt/djangostack-1.4.5-0/apps/django/django_projects/SerloBox/SerloBox/static/nested.png"); padding:5px 0 5px 18px; font-size:15px; }
 #list5 ul li ul li { color:#bfe1f1; height:15px; margin-left:10px; }
 
+/* The rest of CSS */
 body { 
 	font:100% normal Arial, Helvetica, sans-serif; 
 	background:#161712;
