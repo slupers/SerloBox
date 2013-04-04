@@ -1,9 +1,10 @@
 <link rel="stylesheet" href="{{STATIC_URL}}forms.css" />
 
-
 <a href="/logout" text-align:right>Logout</a>
 
 <h1> Manage your files </h1>
+
+<!--Display the user's files-->
 <div id="list5">
 <ul>
 	{% for file, file_info in files.items %}
@@ -20,6 +21,7 @@
 
 <br></br><br></br><br></br><br></br><br></br><br></br>
 
+<!--Form to to upload a file-->
 <form enctype="multipart/form-data" method="post" action="/manage/">
    {% csrf_token %}   
    <table>
