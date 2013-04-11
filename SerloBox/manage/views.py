@@ -20,29 +20,10 @@ def delete(request):
     call(['rm', data_root + user + '/' + file_name])
 
     form = UploadFileForm()
-    files = display_files(user)
+    files = get_files(user)
     # load the page with the form and the user's files
     return render_to_response('upload.html', {'form': form, 'files':files}, RequestContext(request))
 
-def display_files(user):
-    '''Returns a dictionary of files and file info for specified user'''
-    # display user's files
-    files = {}
-    try:
-        # iterate through all files in user's dir
-        for f in os.listdir(data_root + user):
-            # get size and last modification time for each file
-            file_stats = os.stat(data_root + user + '/' + f)
-            file_size = 'File size: ' + str(file_stats[ST_SIZE]) + ' bytes'
-            last_mod_time = 'Last modified on ' + str(time.asctime(time.localtime(file_stats[ST_MTIME])))
-
-            # store the information for this file
-            files[f] = [file_size, last_mod_time]
-
-    except: # new user, doesn't have a directory yet, so just don't display files
-        pass
-
-    return files
 
 # the decorator prevents access and redirects users who have not logged in
 @login_required(redirect_field_name='/login')
@@ -76,14 +57,30 @@ def upload(request):
             handle_uploaded_file(request.FILES['file'], user, file_name)
             return HttpResponseRedirect('/manage')
 
-    # user didn't try to upload, just loading the page so keep form empty
-    else:
-        form = UploadFileForm()
-    
-    files = display_files(user)
-    
+    form = UploadFileForm()
+    files = get_files(user)
     # load the page with the form and the user's files
     return render_to_response('upload.html', {'form': form, 'files':files}, RequestContext(request))
+
+def get_files(user):
+    '''Returns a dictionary of files and file info for specified user'''
+    # display user's files
+    files = {}
+    try:
+        # iterate through all files in user's dir
+        for f in os.listdir(data_root + user):
+            # get size and last modification time for each file
+            file_stats = os.stat(data_root + user + '/' + f)
+            file_size = 'File size: ' + str(file_stats[ST_SIZE]) + ' bytes'
+            last_mod_time = 'Last modified on ' + str(time.asctime(time.localtime(file_stats[ST_MTIME])))
+
+            # store the information for this file
+            files[f] = [file_size, last_mod_time]
+
+    except: # new user, doesn't have a directory yet, so just don't display files
+        pass
+
+    return files
 
 def handle_uploaded_file(f, user, file_name):
     '''Helper function to write uploaded file to disk to user's dir'''

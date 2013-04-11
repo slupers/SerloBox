@@ -5,13 +5,13 @@ from django.conf.urls import patterns, include, url
 # admin.autodiscover()
 
 urlpatterns = patterns('',
-	url(r'^$', 'auth.views.login_user'),
 	url(r'^delete/','manage.views.delete'),
     url(r'^download/','manage.views.download'),
     url(r'^manage/$','manage.views.upload'),
 	url(r'^login/$', 'auth.views.login_user'),
 	url(r'^register/$', 'auth.views.register_user'),
 	url(r'^logout/$', 'auth.views.my_logout'),
+	url(r'^', 'auth.views.login_user'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
