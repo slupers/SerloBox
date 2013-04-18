@@ -1,0 +1,33 @@
+#include <ctype.h>              /* Character types                       */
+#include <stdio.h>              /* Standard buffered input/output        */
+#include <stdlib.h>             /* Standard library functions            */
+#include <string.h>             /* String operations                     */
+#include <unistd.h>             /* Standard symbolic constants and types */
+void rec(int ctr);
+
+void main() {
+	/*int res = 507%10;
+	printf("res: %d\n",res);
+	
+	int nums[11];
+	int i=0;
+	for (i=0; i<11; i++) {
+		nums[i] = i;
+		printf("nums[%d]: %d\n",i,nums[i]);
+	}
+	for (i=0; i<11/2; i++) {
+		int temp = nums[i];
+		nums[i] = nums[11-i-1];
+		nums[11-i-1] = temp;
+	}
+	for (i=0; i<11; i++) {
+		printf("nums[%d]: %d\n",i,nums[i]);
+	}*/
+
+	rec(300);
+}
+
+void rec(int ctr) {
+	printf("%d\n", ctr);
+}
+//int check(

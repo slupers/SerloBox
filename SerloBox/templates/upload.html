@@ -2,47 +2,95 @@
 
 <a href="/logout" text-align:right>Logout</a>
 
-<h1> Manage your files </h1>
+<br></br>
+
+<!--Back link-->
+{% with "/manage/"|add:prev_dir as backlink %}
+	<a href={{ backlink }}>Go Up</a>
+{% endwith %}
+<!--End back link-->
+
+<h1> Manage your data </h1>
 
 <!--Display the user's files-->
 <div id="list5">
 <ul>
-	{% for file, file_info in files.items %}
 
-	<!--Download link-->
-	{% with "/download/"|add:file as dloadlink %}
-	<li>Filename: <a href={{ dloadlink }}>{{ file }}</a>
-	{% endwith %}
-	<!--End Download link-->	
+	{% for fd, file_info in dir_data.items %}
 
-	<!--File info-->
-	<ul>
-		{% for info in file_info %}
-		<li>{{ info }}</li>
+		<!--Dir link if only 1 thing in file info-->
+		{% if file_info|length == 1 %}
+			{% with "/manage/"|add:curr_dir as dirlinkpath %}
+				{% with dirlinkpath|add:fd as dirlink %}
+					<li>Folder: <a href={{ dirlink }}>{{ fd }}</a>
+				{% endwith %}
+			{% endwith %}
+		{% endif %}
+		<!--End Dir link-->
+
+		<!--Download link otherwise-->
+		{% if file_info|length > 1 %}
+			{% with "/download/"|add:curr_dir as dloadlinkpath %}
+				{% with dloadlinkpath|add:fd as dloadlink %}
+					<li>Filename: <a href={{ dloadlink }}>{{ fd }}</a>
+				{% endwith %}
+			{% endwith %}
+		{% endif %}
+		<!--End Download link-->	
+
+		<!--File/Dir info-->
+		<ul>
+				{% for info in file_info %}
+					<li>{{ info }}</li>
+				{% endfor %}
+		</ul>
+		</li>
+		<!--End File/Dir info-->
+
+		<!--Delete button-->
+		{% with "/delete/"|add:curr_dir as dltbutpath %}
+			{% with dltbutpath|add:fd as dltbut %}
+				<form method="link" action={{ dltbut }}>
+					<input type="submit" value="Delete">
+				</form>
+			{% endwith %}
+		{% endwith %}
+		<!--End delete button-->
+
+		<br></br>
+
 		{% endfor %}
-	</ul>
-	</li>
-	<!--End File info-->
-
-	<!--Delete button-->
-	{% with "/delete/"|add:file as dltbut %}
-	<form method="link" action={{ dltbut }}>
-		<input type="submit" value="Delete File">
-	</form>
-	{% endwith %}
-	<!--End delete button-->
-
-	{% endfor %}
+		<!--End Files-->
+	
 </ul>
 </div>
 
-<br></br><br></br>
+<br></br>
 
-<!--Form to to upload a file-->
-<form enctype="multipart/form-data" method="post" action="/manage/">
-   {% csrf_token %}   
-   <table>
-       {{form.as_table}}
-    </table>
-    <input type="submit" value="Submit" id="Save"/>
-</form>
+<h3> Create new folder </h3>
+<!--Form to create folder-->
+{% with "/newdir/"|add:curr_dir as newdiraction %}
+	<form action={{ newdiraction }} method="post">
+		{% csrf_token %}
+		<label>
+			<span>New Folder:</span>
+			<input type="text" name="directory" value="{{ directory }}" />
+		</label>
+		<input type="submit" value="Create Folder" id="NewDir"/>
+	</form>
+{% endwith %}
+<!--End form to create folder-->
+
+<h3> Upload file </h3>
+<!--Form to upload a file-->
+{% with "/manage/"|add:curr_dir as newfileaction %}
+	<form enctype="multipart/form-data" method="post" action={{ newfileaction }}>
+    	{% csrf_token %}   
+  		<table>
+       		{{form.as_table}}
+    	</table>
+    	<input type="submit" value="Submit" id="Save"/>
+	</form>
+{% endwith %}
+
+

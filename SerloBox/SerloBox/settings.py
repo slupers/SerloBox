@@ -12,6 +12,19 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
+
+        'NAME': 'luperso1_serlo',
+        'HOST': 'engr-cpanel-mysql.engr.illinois.edu',
+
+        'USER': 'luperso1_boxroot',
+        'PASSWORD': 'ser242lo'
+
+    }
+}
+
+SERGEY_DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': 'djangostack',
         'HOST': '/opt/djangostack-1.4.5-0/mysql/tmp/mysql.sock',
         'PORT': '33060',

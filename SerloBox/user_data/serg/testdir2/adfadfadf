@@ -1,0 +1,44 @@
+#include <ctype.h>              /* Character types                       */
+#include <stdio.h>              /* Standard buffered input/output        */
+#include <stdlib.h>             /* Standard library functions            */
+#include <string.h>             /* String operations                     */
+#include <unistd.h>             /* Standard symbolic constants and types */
+
+char* rv(char * in) {		/* returns reversed url with correct schema */
+    printf("orig: %s\n", in);
+    int len = strlen(in);
+    if (in[len-1] == '/') len--;
+    int start = strcspn(in,"/");
+    start += 2;
+    printf("start: %d\n", start);
+    char *rvd = malloc(len);
+    //char rvd[len];
+    int j=0;
+    for (j=0; j<len; j++) {
+        rvd[j] = '\0';
+    }
+    int i=0;
+    for(i=0; i<len-start; i++) {
+        rvd[i] = in[len -i - 1];
+    }
+    printf("rvd: %s\n", rvd);
+    char *res = malloc(len*2);
+    for (j=0; j<len*2; j++) {
+        res[j] = '\0';
+    }
+    if (strstr(in,"https://") != NULL ) {
+	strcat(res,"https://");
+    }
+    else {
+    	strcat(res,"http://");
+    }
+    printf("res: %s\n", res);
+    strcat(res, rvd);
+    printf("res: %s\n", res);
+    free(rvd);
+    return res;
+}
+
+void main() {
+    printf("reversed: %s\n", rv("http://www.google.com/cat/\0"));
+}
