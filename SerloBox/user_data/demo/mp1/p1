@@ -1,0 +1,104 @@
+/*
+ * Machine Problem #1
+ * CS 241
+ */
+
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+#include "mp1-functions.h"
+
+int main()
+{
+	/*
+	 * [Part 1]:
+	 *   Edit the provided part1.c file to print out the ten "Illinois" lines
+	 *   that are provided in the code inside mp1-functions.c.
+	 */
+	
+	//1
+	first_step(81);
+	//2
+	/*int* value = malloc (sizeof(int));
+	*value = 132;
+	second_step(value);
+	free(value);
+	*/
+	int value = 132;
+	second_step(&value);	
+
+	//3
+	int ** three = malloc(sizeof(int));
+	*three = malloc(sizeof(int));
+	*three[0] = 8942;
+	double_step(three);
+	free(three[0]);
+	free(three);
+	
+	
+
+	//4
+	value = 0;
+	strange_step(value);
+
+	//5
+	void *five = malloc(4);
+	*((char*)five+3) = 0;
+	empty_step(five);
+	free(five);
+
+	//6
+	char* s2 = malloc(4);
+	void* s1 = &s2[0];
+	s2[3] = 'u';
+	two_step(s1, s2);
+	free(s2);
+
+	//7
+	char* fst = malloc(6);
+	char* snd; 
+	char* trd;
+	snd = fst+2;
+	trd = snd+2;
+	three_step(fst, snd, trd);
+	free(fst);
+	//free(snd);
+	//free(trd);
+
+	//8
+	char* a = malloc(sizeof(2));
+	char* b = malloc(sizeof(3));
+	char* c = malloc(sizeof(4));
+	a[1] = (int)8;
+	b[2] = (int)16;
+	c[3] = (int)24;
+	step_step_step(a, b, c);
+	free(a);
+	free(b);
+	free(c);
+
+	//9
+	int* aa = malloc(sizeof(int));
+	*aa = 2;
+	int bb = 2;
+	it_may_be_odd((char*)aa,bb);
+	free(aa);
+
+	//10
+	int* orange;
+	int* blue = malloc(sizeof(int));
+	blue[0] =  2049;
+	orange = blue;	
+	the_end(orange, blue);
+	free(blue);
+
+	
+
+	/*//4
+	int *ptr = &value;
+	ptr = 0;
+	strange_step(ptr);
+	*/
+	return 0;
+}

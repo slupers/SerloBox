@@ -1,0 +1,39 @@
+<link rel="stylesheet" href="{{STATIC_URL}}forms.css" />
+
+<a href="/logout" text-align:right>Logout</a>
+
+<br></br>
+
+<a href="/manage" text-align:right>Your private files</a>
+
+<h1> Public Files </h1>
+
+<!--Display the files-->
+<div id="list5">
+<ul>
+
+	{% for fd, file_info in dir_data.items %}
+
+		<!--Download link -->
+		{% with "/download_shared/"|add:fd as dloadlink %}
+				<li>Filename: <a href={{ dloadlink }}>{{ fd }}</a>
+		{% endwith %}
+		<!--End Download link-->	
+
+		<!--File info-->
+		<ul>
+				{% for info in file_info %}
+					<li>{{ info }}</li>
+				{% endfor %}
+		</ul>
+		</li>
+		<!--End File/Dir info-->
+
+		<br></br>
+
+	{% endfor %}
+	<!--End Files-->
+	
+</ul>
+</div>
+
